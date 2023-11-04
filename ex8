@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T carre(const T& valeur) {
+    return valeur * valeur;
+}
+
+int main() {
+    
+    int entier = 5;
+    double reel = 3.5;
+
+    int carreEntier = carre(entier);
+    double carreReel = carre(reel);
+
+    cout << "Le carré de " << entier << " est " << carreEntier << std::endl;
+    cout << "Le carré de " << reel << " est " << carreReel << std::endl;
+
+    return 0;
+}
