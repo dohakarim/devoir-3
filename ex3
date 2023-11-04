@@ -1,0 +1,63 @@
+#include <iostream>
+#include <list>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Classe Person pour représenter une personne
+class Person {
+public:
+    string firstName;
+    string lastName;
+    int age;
+
+    // Constructeur pour initialiser les données de la personne
+    Person(const string& first, const string& last, int a) : firstName(first), lastName(last), age(a) {}
+
+    // Fonction de comparaison pour trier les personnes par nom et prénom
+    bool operator<(const Person& other) const {
+        if (lastName != other.lastName) {
+            return lastName < other.lastName;
+        } else {
+            return firstName < other.firstName;
+        }
+    }
+};
+
+int main() {
+    list<Person> peopleList; // Liste de personnes
+
+    // Saisie des personnes
+    while (true) {
+        string first, last;
+        int age;
+
+        cout << "Entrez le prénom (ou tapez 'fin' pour arrêter) : ";
+        cin >> first;
+
+        if (first == "fin") {
+            break;
+        }
+
+        cout << "Entrez le nom : ";
+        cin >> last;
+
+        cout << "Entrez l'âge : ";
+        cin >> age;
+
+        Person person(first, last, age); // Création d'un objet Person
+        peopleList.push_back(person);   // Ajout de la personne à la liste
+    }
+
+    // Tri de la liste en utilisant l'opérateur de comparaison de la classe Person
+    peopleList.sort();
+
+    // Affichage de la liste triée
+    cout << "\nListe triée par nom et prénom : \n";
+    for (const Person& person : peopleList) {
+        cout << "Nom : " << person.lastName << ", Prénom : " << person.firstName << ", Âge : " << person.age << endl;
+    }
+
+    return 0;
+}
