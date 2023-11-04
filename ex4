@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <set>
+#include <iterator>
+
+using namespace std;
+
+// Étape 1 : Créer un set de type int de 1 à 100
+set<int> createSet() {
+    set<int> intSet;
+    for (int i = 1; i <= 100; ++i) {
+        intSet.insert(i);
+    }
+    return intSet;
+}
+
+// Étape 2 : Fonction de recherche avec set en paramètre
+template <typename T>
+bool searchValueInSet(const set<T>& mySet, const T& value) {
+    return mySet.find(value) != mySet.end();
+}
+
+// Étape 3 : Modification de la fonction de recherche pour accepter des itérateurs de début et de fin
+template <typename Iterator, typename T>
+bool searchValueInRange(Iterator begin, Iterator end, const T& value) {
+    return find(begin, end, value) != end;
+}
+
+int main() {
+    // Étape 1
+    set<int> intSet = createSet();
+
+    // Étape 2 : Recherche dans le set
+    int valueToFind = 42;
+    bool isPresentInSet = searchValueInSet(intSet, valueToFind);
+    cout << "Recherche dans le set : " << valueToFind << " est présent ? " << (isPresentInSet ? "Oui" : "Non") << endl;
+
+    // Étape 3 : Exemples avec différents types d'itérateurs
+    vector<string> strVector = {"apple", "banana", "cherry", "date"};
+    list<int> intList = {10, 20, 30, 40, 50};
+    float floatArray[] = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f};
+
+    // Recherche dans un vecteur de chaînes
+    string strToFind = "banana";
+    bool isPresentInVector = searchValueInRange(strVector.begin(), strVector.end(), strToFind);
+    cout << "Recherche dans le vecteur : '" << strToFind << "' est présent ? " << (isPresentInVector ? "Oui" : "Non") << endl;
+
+    // Recherche dans une liste d'entiers
+    int intToFind = 30;
+    bool isPresentInList = searchValueInRange(intList.begin(), intList.end(), intToFind);
+    cout << "Recherche dans la liste : " << intToFind << " est présent ? " << (isPresentInList ? "Oui" : "Non") << endl;
+
+    // Recherche dans un tableau 'classique' de float
+    float floatToFind = 3.3f;
+    bool isPresentInArray = searchValueInRange(floatArray, floatArray + 5, floatToFind);
+    cout << "Recherche dans le tableau de float : " << floatToFind << " est présent ? " << (isPresentInArray ? "Oui" : "Non") << endl;
+
+    return 0;
+}
